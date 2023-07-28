@@ -14,6 +14,11 @@ class Model():
 
 
     async def inference(self,  request: ModelRequest):
+        if request.model != 'NA':
+            model_name = request.model
+            self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+            self.model = AutoModelForSequenceClassification.from_pretrained(model_name)
+           
         inputs = self.tokenizer(request.text, return_tensors="pt")
         with torch.no_grad():
             logits = self.model(**inputs).logits
