@@ -10,3 +10,12 @@ pathlib.Path("output" + ".txt").write_bytes(text.encode())
 '''
 Python PDFQuery Implementation
 '''
+
+'''
+PDF PdfPlumber Implementation
+'''
+import pdfplumber
+with pdfplumber.open("NCF2023.pdf") as pdf:
+    page = pdf.pages[12]
+    print(page.chars)
+    print(page.extract_text)
